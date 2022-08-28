@@ -3,6 +3,7 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { UserModule } from './user/user.module';
 import {getOrmConfig} from "./config/orm.config";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import {getOrmConfig} from "./config/orm.config";
       useFactory: getOrmConfig
     }),
     UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
