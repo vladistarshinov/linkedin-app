@@ -24,7 +24,7 @@ export class UserAuthService {
             )
     }
 
-    public login(user: UserDto): Observable<unknown> {
+    public login(user: UserDto): Observable<Object> {
         return this.validateUser(user.email, user.password)
             .pipe(
                 switchMap((validUser: Omit<User, 'password'>) => {
