@@ -13,7 +13,7 @@ export class UserService {
         private readonly userRepository: Repository<UserEntity>,
     ) {}
 
-    public findAll(): Observable<User[]> {
+    public getAll(): Observable<User[]> {
         return from(this.userRepository.find()).pipe(
             map((users: User[]) => {
                 users.forEach((v: User) => delete v.password)
@@ -22,7 +22,7 @@ export class UserService {
         )
     }
 
-    public findOne(id: string): Observable<Omit<User, 'password'>> {
+    public findById(id: string): Observable<Omit<User, 'password'>> {
         return from(this.userRepository.findOneBy({id})).pipe(
             map((user: User) => {
                 const {password, ...result} = user;
@@ -31,7 +31,7 @@ export class UserService {
         )
     }
 
-    public updateOne(id: string, user: UserDto): Observable<any> {
+    public updateUserData(id: string, user: UserDto): Observable<any> {
         delete user.email;
         delete user.password;
         return from(this.userRepository.update(id, user));
@@ -41,7 +41,7 @@ export class UserService {
         return from(this.userRepository.update(id, user));
     }
 
-    public deleteOne(id: string): Observable<any> {
+    public deleteAccount(id: string): Observable<any> {
         return from(this.userRepository.delete(id));
     }
 

@@ -10,13 +10,13 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get()
-    public findAll(): Observable<User[]> {
-        return this.userService.findAll();
+    public getAll(): Observable<User[]> {
+        return this.userService.getAll();
     }
 
     @Get(':id')
-    public findOne(@Param() params: any): Observable<Omit<User, 'password'>> {
-        return this.userService.findOne(params.id);
+    public getById(@Param() params: any): Observable<Omit<User, 'password'>> {
+        return this.userService.findById(params.id);
     }
 
     @Put(':id')
@@ -24,7 +24,7 @@ export class UserController {
         @Param('id') id: string,
         @Body() user: UserDto
     ): Observable<any> {
-        return this.userService.updateOne(id, user);
+        return this.userService.updateUserData(id, user);
     }
 
     @Put(':id/role')
@@ -37,6 +37,6 @@ export class UserController {
 
     @Delete(':id')
     public delete(@Param('id') id: string): Observable<any> {
-        return this.userService.deleteOne(id);
+        return this.userService.deleteAccount(id);
     }
 }
